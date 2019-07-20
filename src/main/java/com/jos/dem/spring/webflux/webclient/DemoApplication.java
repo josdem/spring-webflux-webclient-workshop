@@ -1,4 +1,4 @@
-package com.example.springwebfluxwebclientworkshop;
+package com.jos.dem.spring.webflux.webclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
