@@ -28,4 +28,8 @@ public class WebclientTest {
       .expectBody(String.class);
   }
 
+  @Test
+  public void shouldGetHeaders() throws Exception {
+  }
+
 }
