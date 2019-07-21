@@ -21,11 +21,8 @@ public class WebclientTest {
 
   @Test
   public void shouldGetHelloWorld() throws Exception {
-    webClient.get().uri("/").accept(APPLICATION_JSON)
-      .exchange()
-      .expectStatus().isOk()
-      .expectHeader().contentType(APPLICATION_JSON_UTF8)
-      .expectBody(String.class);
+    String response = webfluxService.getGrettings().block();
+    assertEquals("Hello World!", response);
   }
 
   @Test
