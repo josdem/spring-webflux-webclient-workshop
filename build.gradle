@@ -3,6 +3,8 @@ plugins {
 	id 'java'
 }
 
+def junitJupiterVersion = '5.5.1'
+
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.jos.dem.spring.webflux.webclient'
@@ -17,4 +19,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+  testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
 }
