@@ -7,10 +7,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jos.dem.spring.webflux.webclient.service.WebfluxService;
+import com.jos.dem.spring.webflux.webclient.service.WebclientService;
 
 @Service
-public class WebfluxServiceImpl implements WebfluxService {
+public class WebclientServiceImpl implements WebclientService {
 
   @Autowired
   private WebClient webClient;
