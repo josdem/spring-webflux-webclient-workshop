@@ -43,7 +43,9 @@ public class WebclientTest {
 
   @Test
   public void shouldGetHeaders() throws Exception {
-    //assertNotNull(webfluxService.getHeaders().block());
+    log.info("Running: Should get headers at {}", new Date());
+    HttpHeaders headers = webfluxService.getHeaders().block();
+    log.info("headers {}", headers);
   }
 
 }
