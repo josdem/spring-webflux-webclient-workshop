@@ -1,5 +1,8 @@
 package com.jos.dem.spring.webflux.webclient.service;
 
+import reactor.core.publisher.Mono;
+import org.springframework.http.HttpHeaders;
+
 public interface WebfluxService {
 
   Mono<String> getGreetings();

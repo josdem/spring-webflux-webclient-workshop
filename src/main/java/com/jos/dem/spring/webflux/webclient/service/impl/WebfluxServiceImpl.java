@@ -2,10 +2,13 @@ package com.jos.dem.spring.webflux.webclient.service.impl;
 
 import reactor.core.publisher.Mono;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jos.dem.spring.webflux.webclient.service.WebfluxService;
 
-public class WewbfluxServiceImpl implements WebfluxService {
+public class WebfluxServiceImpl implements WebfluxService {
 
   @Autowired
   private WebClient webClient;
@@ -17,9 +20,9 @@ public class WewbfluxServiceImpl implements WebfluxService {
     .bodyToMono(String.class);
   }
 
-  public Mono<String> getHeaders(){
-    Mono<HttpHeaders> result = this.webClient.get()
-				.uri("/greeting?name=Spring")
+  public Mono<HttpHeaders> getHeaders(){
+    return webClient.get()
+				.uri("/")
 				.exchange()
 				.map(response -> response.headers().asHttpHeaders());
   }

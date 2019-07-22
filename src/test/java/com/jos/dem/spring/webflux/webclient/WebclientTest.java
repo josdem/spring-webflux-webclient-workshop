@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import org.springframework.http.HttpHeaders;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,7 @@ public class WebclientTest {
 
   @Test
   public void shouldGetHeaders() throws Exception {
+    assertNotNull(webfluxService.getHeaders().block());
   }
 
 }
