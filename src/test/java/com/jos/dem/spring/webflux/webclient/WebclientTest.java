@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 public class WebclientTest {
 
   @Autowired
-  private WebTestClient webClient;
+  private WebfluxService webfluxService;
 
   @Test
   public void shouldGetHelloWorld() throws Exception {
