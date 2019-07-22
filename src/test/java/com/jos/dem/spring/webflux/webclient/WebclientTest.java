@@ -2,8 +2,6 @@ package com.jos.dem.spring.webflux.webclient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
 import java.util.Date;
 
@@ -45,7 +43,8 @@ public class WebclientTest {
   public void shouldGetHeaders() throws Exception {
     log.info("Running: Should get headers at {}", new Date());
     HttpHeaders headers = webfluxService.getHeaders().block();
-    log.info("headers {}", headers);
+    assertEquals("text/plain;charset=UTF-8", headers.getContentType().toString());
+    assertEquals(12L, headers.getContentLength());
   }
 
 }
