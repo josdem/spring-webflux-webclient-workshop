@@ -14,7 +14,7 @@ public class DemoApplication {
 
   @Bean
   WebClient webClient() {
-    return WebClient.create("https://webflux.josdem.io");
+    return WebClient.create("https://localhost:8080");
   }
 
 }

@@ -17,14 +17,14 @@ public class WebfluxServiceImpl implements WebfluxService {
 
   public Mono<String> getGreetings(){
     return webClient.get()
-      .uri("/sanity/ping")
+      .uri("/")
       .retrieve()
     .bodyToMono(String.class);
   }
 
   public Mono<HttpHeaders> getHeaders(){
     return webClient.get()
-				.uri("/sanity/ping")
+				.uri("/")
 				.exchange()
 				.map(response -> response.headers().asHttpHeaders());
   }

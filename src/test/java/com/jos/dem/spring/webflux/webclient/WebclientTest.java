@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,10 +36,9 @@ public class WebclientTest {
 
   @Test
   public void shouldGetHelloWorld() throws Exception {
-    assertNotNull(webfluxService);
-    log.info("webfluxService: {}", webfluxService);
-    //String response = webfluxService.getGreetings().block();
-    //assertEquals("Hello World!", response);
+    log.info("Running: Should get hello world message at {}", new Date());
+    String response = webfluxService.getGreetings().block();
+    assertEquals("Hello World!", response);
   }
 
   @Test
