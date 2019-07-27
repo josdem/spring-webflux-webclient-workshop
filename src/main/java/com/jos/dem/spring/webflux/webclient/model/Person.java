@@ -1,4 +1,4 @@
-package com.jos.dem.spring.webflux.webclient.service;
+package com.jos.dem.spring.webflux.webclient.model;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
