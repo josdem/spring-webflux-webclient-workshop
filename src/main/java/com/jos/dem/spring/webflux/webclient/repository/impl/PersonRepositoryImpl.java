@@ -3,6 +3,8 @@ package com.jos.dem.spring.webflux.webclient.repository.impl;
 import java.util.Map;
 import java.util.HashMap;
 
+import reactor.core.publisher.Flux;
+
 import org.springframework.stereotype.Service;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
@@ -15,6 +17,10 @@ public class PersonRepositoryImpl implements PersonRepository {
 
   public void save(Person person){
     persons.put(person.getNickname(), person);
+  }
+
+  public Flux<Person> getAll(){
+    return Flux.fromIterable(persons.values());
   }
 
 }
