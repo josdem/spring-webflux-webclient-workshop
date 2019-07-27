@@ -24,9 +24,9 @@ public class WebclientServiceImpl implements WebclientService {
 
   public Mono<HttpHeaders> getHeaders(){
     return webClient.get()
-				.uri("/")
-				.exchange()
-				.map(response -> response.headers().asHttpHeaders());
+		  .uri("/")
+			.exchange()
+		  .map(response -> response.headers().asHttpHeaders());
   }
 
 }
