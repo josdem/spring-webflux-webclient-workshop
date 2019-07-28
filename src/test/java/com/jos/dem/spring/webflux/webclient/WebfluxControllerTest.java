@@ -3,7 +3,6 @@ package com.jos.dem.spring.webflux.webclient;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
