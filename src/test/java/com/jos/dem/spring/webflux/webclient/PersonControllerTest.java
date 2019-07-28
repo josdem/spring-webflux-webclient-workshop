@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class WebclientTest {
+public class PersonControllerTest {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -58,14 +58,6 @@ public class WebclientTest {
       () -> assertEquals(nickname, person.getNickname()),
       () -> assertEquals("joseluis.delacruz@gmail.com", person.getEmail())
     );
-  }
-
-  @Test
-  public void shouldGetHeaders() throws Exception {
-    log.info("Running: Should get headers at {}", new Date());
-    HttpHeaders headers = webclientService.getHeaders().block();
-    assertEquals("application/json;charset=UTF-8", headers.getContentType().toString());
-    assertEquals(103L, headers.getContentLength());
   }
 
 }

@@ -1,4 +1,4 @@
-package com.jos.dem.spring.webflux.webclient;
+package com.jos.dem.spring.webflux.webclient.controller;
 
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
@@ -24,7 +24,7 @@ public class PersonController {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
-  @GetMapping("/")
+  @GetMapping("")
   public Flux<Person> getAll(){
     log.info("Getting persons");
     return personRepository.findAll();
