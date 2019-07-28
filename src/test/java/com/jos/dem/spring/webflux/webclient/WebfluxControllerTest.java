@@ -33,6 +33,13 @@ public class WebfluxControllerTest {
   private WebclientService webclientService;
 
   @Test
+  public void shouldGetHelloWorld() throws Exception {
+    log.info("Running: Should get hello world message at {}", new Date());
+    String response = webclientService.getGreetings().block();
+    assertEquals("Hello World!", response);
+  }
+
+  @Test
   public void shouldGetHeaders() throws Exception {
     log.info("Running: Should get headers at {}", new Date());
     HttpHeaders headers = webclientService.getHeaders().block();

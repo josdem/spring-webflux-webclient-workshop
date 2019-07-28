@@ -9,8 +9,10 @@ import com.jos.dem.spring.webflux.webclient.model.Person;
 
 public interface WebclientService {
 
+  Mono<String> getGreetings();
+  Mono<HttpHeaders> getHeaders();
   Flux<Person> getAll();
   Mono<Person> getPerson(String nickname);
-  Mono<HttpHeaders> getHeaders();
+
 
 }

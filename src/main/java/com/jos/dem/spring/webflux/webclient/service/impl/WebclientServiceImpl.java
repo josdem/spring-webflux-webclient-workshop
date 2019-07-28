@@ -18,6 +18,20 @@ public class WebclientServiceImpl implements WebclientService {
   @Autowired
   private WebClient webClient;
 
+  public Mono<String> getGreetings(){
+    return webClient.get()
+      .uri("/")
+      .retrieve()
+    .bodyToMono(String.class);
+  }
+
+  public Mono<HttpHeaders> getHeaders(){
+    return webClient.get()
+		  .uri("/")
+		  .exchange()
+		  .map(response -> response.headers().asHttpHeaders());
+  }
+
   public Flux<Person> getAll(){
     return webClient.get()
       .uri("/persons/")
@@ -30,13 +44,6 @@ public class WebclientServiceImpl implements WebclientService {
       .uri("/persons/" + nickname)
       .retrieve()
     .bodyToMono(Person.class);
-  }
-
-  public Mono<HttpHeaders> getHeaders(){
-    return webClient.get()
-		  .uri("/")
-		  .exchange()
-		  .map(response -> response.headers().asHttpHeaders());
   }
 
 }
