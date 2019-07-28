@@ -18,11 +18,18 @@ public class WebclientServiceImpl implements WebclientService {
   @Autowired
   private WebClient webClient;
 
-  public Flux<Person> findAll(){
+  public Flux<Person> getAll(){
     return webClient.get()
       .uri("/persons/")
       .retrieve()
     .bodyToFlux(Person.class);
+  }
+
+  public Mono<Person> getPerson(String nickname) {
+    return webClient.get()
+      .uri("/persons/" + nickname)
+      .retrieve()
+    .bodyToMono(Person.class);
   }
 
   public Mono<HttpHeaders> getHeaders(){

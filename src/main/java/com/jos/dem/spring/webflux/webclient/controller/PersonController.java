@@ -4,6 +4,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,15 @@ public class PersonController {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @GetMapping("/")
-  public Flux<Person> findAll(){
+  public Flux<Person> getAll(){
     log.info("Getting persons");
-    return personRepository.getAll();
+    return personRepository.findAll();
+  }
+
+  @GetMapping("/{nickname}")
+  public Mono<Person> getByIdNickname(@PathVariable String nickname){
+    log.info("Calling find person by nickname: " + nickname);
+    return personRepository.findByNickname(nickname);
   }
 
 }

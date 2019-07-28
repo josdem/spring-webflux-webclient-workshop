@@ -3,6 +3,7 @@ package com.jos.dem.spring.webflux.webclient.repository.impl;
 import java.util.Map;
 import java.util.HashMap;
 
+import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
 import org.springframework.stereotype.Service;
@@ -19,8 +20,12 @@ public class PersonRepositoryImpl implements PersonRepository {
     persons.put(person.getNickname(), person);
   }
 
-  public Flux<Person> getAll(){
+  public Flux<Person> findAll(){
     return Flux.fromIterable(persons.values());
+  }
+
+  public Mono<Person> findByNickname(String nickname){
+    return Mono.just(persons.get(nickname));
   }
 
 }

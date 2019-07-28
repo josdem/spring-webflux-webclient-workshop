@@ -35,7 +35,7 @@ public class WebclientTest {
   @Test
   public void shouldGetAllPersons() throws Exception {
     log.info("Running: Should get persons at {}", new Date());
-    List<Person> persons = webclientService.findAll().collectList().block();
+    List<Person> persons = webclientService.getAll().collectList().block();
     assertEquals(5, persons.size(), "Should have the right size") ;
 
     assertAll("person",
@@ -44,6 +44,19 @@ public class WebclientTest {
       () -> assertTrue(persons.contains(new Person("edzero", "edzero@email.com"))),
       () -> assertTrue(persons.contains(new Person("siedrix", "siedrix@email.com"))),
       () -> assertTrue(persons.contains(new Person("mkheck", "mkheck@losheckler.com")))
+    );
+  }
+
+  @Test
+  public void shouldGetPerson() throws Exception {
+    log.info("Running: I validate person data at {}", new Date());
+
+    String nickname = "josdem";
+
+    Person person = webclientService.getPerson(nickname).block();
+    assertAll("person",
+      () -> assertEquals(nickname, person.getNickname()),
+      () -> assertEquals("joseluis.delacruz@gmail.com", person.getEmail())
     );
   }
 
