@@ -1,7 +1,5 @@
 package com.jos.dem.spring.webflux.webclient;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.jos.dem.spring.webflux.webclient.model.Person;
 import com.jos.dem.spring.webflux.webclient.service.WebclientService;
 
 import org.slf4j.Logger;
