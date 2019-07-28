@@ -1,5 +1,7 @@
 package com.jos.dem.spring.webflux.webclient;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
@@ -33,8 +35,16 @@ public class WebclientTest {
   @Test
   public void shouldGetAllPersons() throws Exception {
     log.info("Running: Should get persons at {}", new Date());
-    List<Person> response = webclientService.findAll().collectList().block();
-    assertEquals(5, response.size(), "Should have the right size") ;
+    List<Person> persons = webclientService.findAll().collectList().block();
+    assertEquals(5, persons.size(), "Should have the right size") ;
+
+    assertAll("person",
+      () -> assertTrue(persons.contains(new Person("josdem", "joseluis.delacruz@gmail.com"))),
+      () -> assertTrue(persons.contains(new Person("tgrip", "tgrip@email.com"))),
+      () -> assertTrue(persons.contains(new Person("edzero", "edzero@email.com"))),
+      () -> assertTrue(persons.contains(new Person("siedrix", "siedrix@email.com"))),
+      () -> assertTrue(persons.contains(new Person("mkheck", "mkheck@losheckler.com")))
+    );
   }
 
   @Test
