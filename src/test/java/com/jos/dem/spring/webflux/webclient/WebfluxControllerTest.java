@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class IndexControllerTest {
+public class WebfluxControllerTest {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
