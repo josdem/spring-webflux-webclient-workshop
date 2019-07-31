@@ -13,7 +13,8 @@ public interface WebclientService {
   Mono<String> getGreetings();
   Mono<HttpHeaders> getHeaders();
   Flux<Person> getAll();
-  Mono<ClientResponse> getPerson(String nickname);
+  Mono<Person> getPerson(String nickname);
+  Mono<ClientResponse> getPersonAsClientResponse(String nickname);
 
 
 }

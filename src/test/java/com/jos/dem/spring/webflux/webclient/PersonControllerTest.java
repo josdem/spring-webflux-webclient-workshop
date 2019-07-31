@@ -51,12 +51,12 @@ public class PersonControllerTest {
   }
 
   @Test
-  public void shouldGetPerson() throws Exception {
-    log.info("Running: I validate person data at {}", new Date());
+  public void shouldGetPersonAsClientResponse() throws Exception {
+    log.info("Running: I validate person from client response at {}", new Date());
 
     String nickname = "josdem";
 
-    Mono<ClientResponse> response = webclientService.getPerson(nickname);
+    Mono<ClientResponse> response = webclientService.getPersonAsClientResponse(nickname);
     Mono<Person> publisher = response.flatMap(clientResponse -> clientResponse.bodyToMono(Person.class));
     Person person = publisher.block();
 

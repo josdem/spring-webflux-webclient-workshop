@@ -40,7 +40,14 @@ public class WebclientServiceImpl implements WebclientService {
     .bodyToFlux(Person.class);
   }
 
-  public Mono<ClientResponse> getPerson(String nickname) {
+  public Mono<Person> getPerson(String nickname) {
+    return webClient.get()
+      .uri("/persons/" + nickname)
+      .retrieve()
+      .bodyToMono(Person.class);
+  }
+
+  public Mono<ClientResponse> getPersonAsClientResponse(String nickname) {
     return webClient.get()
       .uri("/persons/" + nickname)
       .exchange();
