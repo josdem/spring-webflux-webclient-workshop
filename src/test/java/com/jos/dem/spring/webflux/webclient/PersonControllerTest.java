@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Date;
 import java.util.List;
 
+import reactor.core.publisher.Mono;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.web.reactive.function.client.ClientResponse;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
 import com.jos.dem.spring.webflux.webclient.service.WebclientService;
@@ -53,11 +56,15 @@ public class PersonControllerTest {
 
     String nickname = "josdem";
 
-    Person person = webclientService.getPerson(nickname).block();
+    Mono<ClientResponse> response = webclientService.getPerson(nickname);
+    Mono<Person> publisher = response.flatMap(clientResponse -> clientResponse.bodyToMono(Person.class));
+    Person person = publisher.block();
+
     assertAll("person",
       () -> assertEquals(nickname, person.getNickname()),
       () -> assertEquals("joseluis.delacruz@gmail.com", person.getEmail())
     );
+
   }
 
 }

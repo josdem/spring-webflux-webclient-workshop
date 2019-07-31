@@ -5,6 +5,7 @@ import reactor.core.publisher.Flux;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.ClientResponse;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,10 @@ public class WebclientServiceImpl implements WebclientService {
     .bodyToFlux(Person.class);
   }
 
-  public Mono<Person> getPerson(String nickname) {
+  public Mono<ClientResponse> getPerson(String nickname) {
     return webClient.get()
       .uri("/persons/" + nickname)
-      .retrieve()
-    .bodyToMono(Person.class);
+      .exchange();
   }
 
 }
