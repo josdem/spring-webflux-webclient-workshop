@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.2.0.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id 'java'
 }
 
 group = 'com.jos.dem.spring.webflux.webclient'
@@ -23,8 +23,8 @@ dependencies {
   compileOnly('org.projectlombok:lombok')
   annotationProcessor 'org.projectlombok:lombok'
   testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
   testImplementation 'io.projectreactor:reactor-test'
 }
 
