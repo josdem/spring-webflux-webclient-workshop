@@ -4,8 +4,6 @@ plugins {
 	id 'java'
 }
 
-def junitJupiterVersion = '5.5.1'
-
 group = 'com.jos.dem.spring.webflux.webclient'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
