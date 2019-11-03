@@ -1,5 +1,7 @@
 package com.jos.dem.spring.webflux.webclient;
 
+import static org.springframework.http.HttpStatus.OK;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.web.reactive.function.client.ClientResponse;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
 import com.jos.dem.spring.webflux.webclient.service.WebclientService;
@@ -27,11 +30,13 @@ public class WebclientExchangeTest {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private WebclientService webclientService;
+  private WebclientService webClientService;
 
   @Test
   public void shouldValidateClientResponse() throws Exception {
     log.info("Running: Should validate client response at {}", new Date());
+    ClientResponse response = webClientService.getPersonAsClientResponse("josdem").block();
+    assertEquals(OK, response.statusCode(), "should get OK status");
   }
 
 }
