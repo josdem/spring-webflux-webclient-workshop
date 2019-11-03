@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
 
-public interface WebclientService {
+public interface WebClientService {
 
   Mono<String> getGreetings();
   Mono<HttpHeaders> getHeaders();

@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.web.reactive.function.client.ClientResponse;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
-import com.jos.dem.spring.webflux.webclient.service.WebclientService;
+import com.jos.dem.spring.webflux.webclient.service.WebClientService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class PersonControllerTest {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private WebclientService webclientService;
+  private WebClientService webclientService;
 
   @Test
   public void shouldGetAllPersons() throws Exception {

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import com.jos.dem.spring.webflux.webclient.service.WebclientService;
+import com.jos.dem.spring.webflux.webclient.service.WebClientService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class WebfluxControllerTest {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private WebclientService webclientService;
+  private WebClientService webclientService;
 
   @Test
   public void shouldGetHelloWorld() throws Exception {

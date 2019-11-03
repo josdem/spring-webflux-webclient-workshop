@@ -9,12 +9,12 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jos.dem.spring.webflux.webclient.service.WebclientService;
+import com.jos.dem.spring.webflux.webclient.service.WebClientService;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
 
 @Service
-public class WebclientServiceImpl implements WebclientService {
+public class WebClientServiceImpl implements WebClientService {
 
   @Autowired
   private WebClient webClient;
