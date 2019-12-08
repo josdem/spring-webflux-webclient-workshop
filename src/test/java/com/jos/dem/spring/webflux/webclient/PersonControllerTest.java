@@ -1,28 +1,22 @@
 package com.jos.dem.spring.webflux.webclient;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Date;
-import java.util.List;
-
-import reactor.core.publisher.Mono;
-
+import com.jos.dem.spring.webflux.webclient.model.Person;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import org.springframework.http.HttpHeaders;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.ClientResponse;
+import reactor.core.publisher.Mono;
 
-import com.jos.dem.spring.webflux.webclient.model.Person;
-import com.jos.dem.spring.webflux.webclient.service.WebClientService;
+import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PersonControllerTest {
@@ -30,37 +24,37 @@ public class PersonControllerTest {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private WebClientService webclientService;
+  private WebTestClient webTestClient;
 
   @Test
-  public void shouldGetAllPersons() throws Exception {
-    log.info("Running: Should get persons at {}", new Date());
-    List<Person> persons = webclientService.getAll().collectList().block();
-    assertEquals(5, persons.size(), "Should have the right size") ;
+  @DisplayName("Should get a list of persons")
+  public void shouldGetPersons() throws Exception {
+    log.info("Running: Should get a list of persons at {}", new Date());
 
-    assertAll("person",
-      () -> assertTrue(persons.contains(new Person("josdem", "joseluis.delacruz@gmail.com"))),
-      () -> assertTrue(persons.contains(new Person("tgrip", "tgrip@email.com"))),
-      () -> assertTrue(persons.contains(new Person("edzero", "edzero@email.com"))),
-      () -> assertTrue(persons.contains(new Person("siedrix", "siedrix@email.com"))),
-      () -> assertTrue(persons.contains(new Person("mkheck", "mkheck@losheckler.com")))
-    );
+    webTestClient.get().uri("/persons/")
+            .exchange()
+            .expectStatus().isOk()
+            .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
+            .expectBodyList(Person.class);
   }
 
   @Test
-  public void shouldGetPersonAsClientResponse() throws Exception {
-    log.info("Running: I validate person from client response at {}", new Date());
+  @DisplayName("Should get all of persons")
+  public void shouldGetAllPersons() throws Exception {
+    log.info("Running: Should get all persons at {}", new Date());
 
-    String nickname = "josdem";
+    webTestClient.get().uri("/persons/")
+            .exchange()
+            .expectStatus().isOk()
+            .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
+            .expectBodyList(Person.class)
+            .value(persons -> persons.size(), equalTo(5))
+            .value(persons -> persons.contains(new Person("josdem","joseluis.delacruz@gmail.com")))
+            .value(persons -> persons.contains(new Person("tgrip", "tgrip@email.com")))
+            .value(persons -> persons.contains(new Person("edzero", "edzero@email.com")))
+            .value(persons -> persons.contains(new Person("siedrix", "siedrix@email.com")))
+            .value(persons -> persons.contains(new Person("mkheck", "mkheck@losheckler.com")));
 
-    Mono<ClientResponse> response = webclientService.getPersonAsClientResponse(nickname);
-    Mono<Person> publisher = response.flatMap(clientResponse -> clientResponse.bodyToMono(Person.class));
-    Person person = publisher.block();
-
-    assertAll("person",
-      () -> assertEquals(nickname, person.getNickname()),
-      () -> assertEquals("joseluis.delacruz@gmail.com", person.getEmail())
-    );
 
   }
 
