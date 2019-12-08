@@ -33,20 +33,6 @@ public class WebClientServiceImpl implements WebClientService {
 		  .map(response -> response.headers().asHttpHeaders());
   }
 
-  public Flux<Person> getAll(){
-    return webClient.get()
-      .uri("/persons/")
-      .retrieve()
-    .bodyToFlux(Person.class);
-  }
-
-  public Mono<Person> getPerson(String nickname) {
-    return webClient.get()
-      .uri("/persons/" + nickname)
-      .retrieve()
-      .bodyToMono(Person.class);
-  }
-
   public Mono<ClientResponse> getPersonAsClientResponse(String nickname) {
     return webClient.get()
       .uri("/persons/" + nickname)

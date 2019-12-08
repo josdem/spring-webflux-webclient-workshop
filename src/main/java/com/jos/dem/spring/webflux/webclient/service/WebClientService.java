@@ -12,8 +12,6 @@ public interface WebClientService {
 
   Mono<String> getGreetings();
   Mono<HttpHeaders> getHeaders();
-  Flux<Person> getAll();
-  Mono<Person> getPerson(String nickname);
   Mono<ClientResponse> getPersonAsClientResponse(String nickname);
 
 
