@@ -54,8 +54,6 @@ public class PersonControllerTest {
             .value(persons -> persons.contains(new Person("edzero", "edzero@email.com")))
             .value(persons -> persons.contains(new Person("siedrix", "siedrix@email.com")))
             .value(persons -> persons.contains(new Person("mkheck", "mkheck@losheckler.com")));
-
-
   }
 
 }
