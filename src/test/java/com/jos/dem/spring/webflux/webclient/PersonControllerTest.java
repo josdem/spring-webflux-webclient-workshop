@@ -10,13 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import reactor.core.publisher.Mono;
 
 import java.util.Date;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PersonControllerTest {
@@ -25,18 +22,6 @@ public class PersonControllerTest {
 
   @Autowired
   private WebTestClient webTestClient;
-
-  @Test
-  @DisplayName("Should get a list of persons")
-  public void shouldGetPersons() throws Exception {
-    log.info("Running: Should get a list of persons at {}", new Date());
-
-    webTestClient.get().uri("/persons/")
-            .exchange()
-            .expectStatus().isOk()
-            .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
-            .expectBodyList(Person.class);
-  }
 
   @Test
   @DisplayName("Should get all of persons")
