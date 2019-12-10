@@ -1,21 +1,17 @@
 package com.jos.dem.spring.webflux.webclient;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Date;
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import org.springframework.http.HttpHeaders;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-import com.jos.dem.spring.webflux.webclient.service.WebClientService;
+import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class WebfluxControllerTest {
@@ -23,21 +19,29 @@ public class WebfluxControllerTest {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
-  private WebClientService webclientService;
+  private WebTestClient webTestClient;
 
   @Test
-  public void shouldGetHelloWorld() throws Exception {
-    log.info("Running: Should get hello world message at {}", new Date());
-    String response = webclientService.getGreetings().block();
-    assertEquals("Hello World!", response);
+  @DisplayName("Should validate message with Hamcrest")
+  public void shouldValidateMessageWithHamcrest() throws Exception {
+    log.info("Running: Should validate message with Hamcrest at {}", new Date());
+
+    webTestClient.get().uri("/")
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class).isEqualTo("Hello World!");
   }
 
   @Test
-  public void shouldGetHeaders() throws Exception {
-    log.info("Running: Should get headers at {}", new Date());
-    HttpHeaders headers = webclientService.getHeaders().block();
-    assertEquals("text/plain;charset=UTF-8", headers.getContentType().toString());
-    assertEquals(12L, headers.getContentLength());
+  @DisplayName("Should validate message with Junit Jupiter")
+  public void shouldValidatetMessageWithJunitJupiter() throws Exception {
+    log.info("Running: Should validate message with Junit Jupiter at {}", new Date());
+
+    webTestClient.get().uri("/")
+            .exchange()
+            .expectStatus().isOk()
+            .expectBody(String.class)
+            .value(message -> assertEquals("Hello World!", message));
   }
 
 }

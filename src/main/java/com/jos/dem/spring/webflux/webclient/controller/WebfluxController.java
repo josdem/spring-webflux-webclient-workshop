@@ -1,5 +1,6 @@
 package com.jos.dem.spring.webflux.webclient.controller;
 
+import org.springframework.http.MediaType;
 import reactor.core.publisher.Mono;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ public class WebfluxController {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
-  @GetMapping("/")
+  @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> index(){
     log.info("Calling index");
     return Mono.just("Hello World!");
