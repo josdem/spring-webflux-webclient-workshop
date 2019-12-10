@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -15,13 +14,13 @@ import java.util.Date;
 
 import static org.hamcrest.Matchers.equalTo;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class PersonControllerTest {
-
-  private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private WebTestClient webTestClient;
+
+  private Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Test
   @DisplayName("Should get all of persons")
