@@ -32,6 +32,7 @@ public class PersonControllerTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON_VALUE)
+            .expectHeader().contentLength(12L)
             .expectBodyList(Person.class)
             .value(persons -> persons.size(), equalTo(5))
             .value(persons -> persons.contains(new Person("josdem","joseluis.delacruz@gmail.com")))
