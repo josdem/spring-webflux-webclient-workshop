@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.Date;
+import org.springframework.web.reactive.function.BodyInserters;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -48,8 +49,9 @@ public class PersonControllerTest {
 
     webTestClient.post()
         .uri("/persons/")
+        .body(BodyInserters.fromObject(new Person("starbuxman","josh@email.com")))
         .exchange()
-        .expectStatus().isCreated();
+        .expectStatus().isOk();
   }
 
 }
