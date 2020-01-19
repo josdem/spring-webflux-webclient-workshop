@@ -25,7 +25,7 @@ public class PersonControllerTest {
 
   @Test
   @DisplayName("Should get all of persons")
-  public void shouldGetAllPersons() throws Exception {
+  void shouldGetAllPersons() {
     log.info("Running: Should get all persons at {}", new Date());
 
     webTestClient.get().uri("/persons/")
@@ -39,6 +39,17 @@ public class PersonControllerTest {
             .value(persons -> persons.contains(new Person("edzero", "edzero@email.com")))
             .value(persons -> persons.contains(new Person("siedrix", "siedrix@email.com")))
             .value(persons -> persons.contains(new Person("mkheck", "mkheck@losheckler.com")));
+  }
+
+  @Test
+  @DisplayName("Should create a person")
+  void shouldCreatePerson() {
+    log.info("Running: Should create a person at {}", new Date());
+
+    webTestClient.post()
+        .uri("/persons/")
+        .exchange()
+        .expectStatus().isCreated();
   }
 
 }
