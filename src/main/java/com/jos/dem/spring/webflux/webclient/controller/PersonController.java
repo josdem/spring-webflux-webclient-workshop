@@ -1,28 +1,23 @@
 package com.jos.dem.spring.webflux.webclient.controller;
 
-import reactor.core.publisher.Mono;
-import reactor.core.publisher.Flux;
-
+import com.jos.dem.spring.webflux.webclient.model.Person;
+import com.jos.dem.spring.webflux.webclient.repository.PersonRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import com.jos.dem.spring.webflux.webclient.model.Person;
-import com.jos.dem.spring.webflux.webclient.repository.PersonRepository;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+@Slf4j
 @RestController
 @RequestMapping("/persons")
+@RequiredArgsConstructor
 public class PersonController {
 
-  @Autowired
-  private PersonRepository personRepository;
-
-  private Logger log = LoggerFactory.getLogger(this.getClass());
+  private final PersonRepository personRepository;
 
   @GetMapping("")
   public Flux<Person> getAll(){
