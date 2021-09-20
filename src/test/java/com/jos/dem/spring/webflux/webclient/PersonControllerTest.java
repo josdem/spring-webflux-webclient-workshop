@@ -57,4 +57,24 @@ class PersonControllerTest {
         .expectStatus()
         .isOk();
   }
+
+  @Test
+  @DisplayName("Should update a person")
+  void shouldUpdatePerson(TestInfo testInfo) {
+    log.info("Running: {}", testInfo.getDisplayName());
+
+    webTestClient
+            .put()
+            .uri("/persons/tgrip")
+            .body(BodyInserters.fromValue(new Person("tgip", "tgrip@gmail.com")))
+            .exchange()
+            .expectStatus()
+            .isOk();
+
+    webTestClient
+            .get()
+            .uri("/persons/tgrip")
+            .exchange()
+            .expectBody().jsonPath("email", "tgrip@gmail.com");
+  }
 }
