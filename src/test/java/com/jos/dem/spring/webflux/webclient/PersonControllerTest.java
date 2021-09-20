@@ -1,6 +1,8 @@
 package com.jos.dem.spring.webflux.webclient;
 
 import com.jos.dem.spring.webflux.webclient.model.Person;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,13 +18,12 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class PersonControllerTest {
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
+class PersonControllerTest {
 
-  @Autowired
-  private WebTestClient webTestClient;
-
-  private Logger log = LoggerFactory.getLogger(this.getClass());
+  private final WebTestClient webTestClient;
 
   @Test
   @DisplayName("Should get all of persons")
