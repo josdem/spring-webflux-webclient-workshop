@@ -1,12 +1,13 @@
 package com.jos.dem.spring.webflux.webclient.repository;
 
-import reactor.core.publisher.Mono;
-import reactor.core.publisher.Flux;
-
 import com.jos.dem.spring.webflux.webclient.model.Person;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface PersonRepository {
   void save(Person person);
-  Flux<Person>findAll();
+
+  Flux<Person> findAll();
+
   Mono<Person> findByNickname(String nickname);
 }

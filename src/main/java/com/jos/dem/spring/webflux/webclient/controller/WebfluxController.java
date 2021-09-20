@@ -11,9 +11,8 @@ import reactor.core.publisher.Mono;
 public class WebfluxController {
 
   @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> index(){
+  public Mono<String> index() {
     log.info("Calling index");
     return Mono.just("Hello World!");
   }
-
 }
