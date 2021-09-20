@@ -52,7 +52,7 @@ class PersonControllerTest {
     webTestClient
         .post()
         .uri("/persons/")
-        .body(BodyInserters.fromObject(new Person("starbuxman", "josh@email.com")))
+        .body(BodyInserters.fromValue(new Person("starbuxman", "josh@email.com")))
         .exchange()
         .expectStatus()
         .isOk();
