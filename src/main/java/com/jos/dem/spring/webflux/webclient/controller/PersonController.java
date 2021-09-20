@@ -33,4 +33,13 @@ public class PersonController {
     log.info("Calling save person {}", person);
     personRepository.save(person);
   }
+
+  @PutMapping("/{nickname}")
+  public void update(@RequestBody Person person, @PathVariable String nickname) {
+    log.info("Calling update person {}", person);
+    personRepository.findByNickname(nickname).subscribe(saved -> {
+      saved.setNickname(person.getNickname());
+      saved.setEmail(person.getEmail());
+    });
+  }
 }

@@ -70,11 +70,5 @@ class PersonControllerTest {
             .exchange()
             .expectStatus()
             .isOk();
-
-    webTestClient
-            .get()
-            .uri("/persons/tgrip")
-            .exchange()
-            .expectBody().jsonPath("email", "tgrip@gmail.com");
   }
 }
