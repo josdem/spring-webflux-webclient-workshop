@@ -31,5 +31,6 @@ public class PersonController {
   @PostMapping("")
   public void save(@RequestBody Person person) {
     log.info("Calling save person {}", person);
+    personRepository.save(person);
   }
 }
