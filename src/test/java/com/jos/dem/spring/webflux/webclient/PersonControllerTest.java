@@ -45,6 +45,22 @@ class PersonControllerTest {
   }
 
   @Test
+  @DisplayName("Should get by nickname")
+  void shouldGetByNickname(TestInfo testInfo) {
+    log.info("Running: {}", testInfo.getDisplayName());
+
+    webTestClient
+        .get()
+        .uri("/persons/josdem")
+        .exchange()
+        .expectBody()
+        .jsonPath("$.nickname")
+        .isEqualTo("josdem")
+        .jsonPath("$.email")
+        .isEqualTo("joseluis.delacruz@gmail.com");
+  }
+
+  @Test
   @DisplayName("Should create a person")
   void shouldCreatePerson(TestInfo testInfo) {
     log.info("Running: {}", testInfo.getDisplayName());
@@ -64,11 +80,11 @@ class PersonControllerTest {
     log.info("Running: {}", testInfo.getDisplayName());
 
     webTestClient
-            .put()
-            .uri("/persons/tgrip")
-            .body(BodyInserters.fromValue(new Person("tgip", "tgrip@gmail.com")))
-            .exchange()
-            .expectStatus()
-            .isOk();
+        .put()
+        .uri("/persons/tgrip")
+        .body(BodyInserters.fromValue(new Person("tgip", "tgrip@gmail.com")))
+        .exchange()
+        .expectStatus()
+        .isOk();
   }
 }
