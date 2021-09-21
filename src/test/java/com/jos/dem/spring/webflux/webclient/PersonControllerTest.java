@@ -82,9 +82,19 @@ class PersonControllerTest {
     webTestClient
         .put()
         .uri("/persons/tgrip")
-        .body(BodyInserters.fromValue(new Person("tgip", "tgrip@gmail.com")))
+        .body(BodyInserters.fromValue(new Person("tgrip", "tgrip@gmail.com")))
         .exchange()
         .expectStatus()
         .isOk();
+
+    webTestClient
+            .get()
+            .uri("/persons/tgrip")
+            .exchange()
+            .expectBody()
+            .jsonPath("$.nickname")
+            .isEqualTo("tgrip")
+            .jsonPath("$.email")
+            .isEqualTo("tgrip@gmail.com");
   }
 }
