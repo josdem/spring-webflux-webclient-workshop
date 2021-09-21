@@ -15,6 +15,11 @@ gradle bootRun
 gradle test
 ```
 
+### To run a single test
+
+```bash
+gradle test --tests TestName.methodName
+```
 
 #### Read this as reference:
 
